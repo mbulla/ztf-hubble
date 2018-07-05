@@ -14,7 +14,7 @@ plt.rc("legend", fontsize=15)
 
 ##### Cut parameters
 
-pmax_g, pmax_r, nmin_g, nmin_r, x1_min, x1_max, chisqred_max = mf.hdiag_params()
+x1_min, x1_max, chisqred_max, pmax_g, pmax_r, nmin_g, nmin_r = mf.hdiag_params()
 
 ### Histograms
 

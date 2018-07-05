@@ -93,8 +93,8 @@ firstep = min(firstg,firstr)
 
 ###### First epoch
 absmax = max(-min(firstep),max(firstep))
-nep = int(absmax/dep)+1
-ax2.hist(firstep,bins=arange(-dep*(nep+1/2.),dep*(nep+1/2.),dep),label="%d of %d SNe"%(len(firstep),Nmarsh))
+nep = int(absmax/dphase)+1
+ax2.hist(firstep,bins=arange(-dphase*(nep+1/2.),dphase*(nep+1/2.),dphase),label="%d of %d SNe"%(len(firstep),Nmarsh))
 
 ###### x1
 absmax = max(-min(x1),max(x1))

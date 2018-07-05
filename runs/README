@@ -1,0 +1,1 @@
+This is where fits parameters from fitall.py are saved. Files saved here can be used by hdiag.py to create histograms and hubble diagrams

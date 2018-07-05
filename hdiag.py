@@ -56,8 +56,8 @@ for i, line in enumerate(a):
 
 chisq_red = np.array(chisq) / ndof
 
-print "%s are missing g-band photometry" %len(np.array(firstg)[np.where(np.array(firstg)==1e6)])
-print "%s are missing r-band photometry" %len(np.array(firstr)[np.where(np.array(firstr)==1e6)])
+print("%s are missing g-band photometry" %len(np.array(firstg)[np.where(np.array(firstg)==1e6)]))
+print("%s are missing r-band photometry" %len(np.array(firstr)[np.where(np.array(firstr)==1e6)]))
 
 ######################################################
 ####################### HISTOGRAMS ###################
@@ -82,6 +82,8 @@ ax1.hist(z,bins=arange(-dz/2.,dz*(nz+1/2.),dz),label="%d of %d SNe"%(len(z),Nmar
 
 ##### Apply cuts
 w=list(zip(SN,x1,c,firstg,firstr,ng,nr,z,mu,sig_mu,chisq_red))
+print(type(chisqred_max), chisqred_max)
+chisqred_max = np.float(chisqred_max)
 ww=list(filter(lambda r:r[1]>=x1_min and r[1]<=x1_max 
 					    and r[3]<=pmax_g and r[4]<=pmax_r 
 					    and r[5]>=nmin_g and r[6]>=nmin_r
@@ -138,6 +140,6 @@ for i, txt in enumerate(SN):
 	ax.errorbar(z[i],mu[i],yerr=sig_mu[i],color="red",zorder=2)
 	#ax.annotate(txt[:],(z[i]+0.001,mu[i]),size=8)
 
-fig2.show()
+#fig2.show()
 
-#fig2.savefig("hubble1.pdf")	
+fig2.savefig("hubble1.pdf")	

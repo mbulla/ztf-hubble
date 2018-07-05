@@ -253,13 +253,13 @@ def hdiag_params():
         x1_min = input("Enter min(x1): ")
         x1_max = input("Enter max(x1): ")
     else:
-        x1_min = -1e5
-        x1_max = 1e5
+        x1_min = -11
+        x1_max = 11
 
     chicut = raw_input("Would you like a cut on the reduced chisquare from SALT2 fitting [y/n] ? ")
 
     if chicut == "y":
-        chisqred_max = input("Enter min(chi_sq_red): ")
+        chisqred_max = input("Enter max(chi_sq_red): ")
     else:
         chisqred_max = 1e5
 

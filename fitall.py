@@ -37,7 +37,7 @@ for i in range(0,len(SN_dupl)):
     nobj[np.where(name==SN_dupl[i][1])[0][0]] = -1
 
 
-print "%d SNe"%nSN
+print("%d SNe"%nSN)
 # Write header
 if save == 1:
     out = open(filename+".txt","w")

@@ -156,7 +156,7 @@ def print_and_save(sn,isn,nSN,data,fit,par1,par2,save,message,filename):
     # SN included in the analysis, good fit
     if message == 0:
 
-        print "%s (%d out of %d)"%(sn,isn+1,nSN)
+        print("%s (%d out of %d)"%(sn,isn+1,nSN))
 
         if save == 1:
 
@@ -194,7 +194,7 @@ def print_and_save(sn,isn,nSN,data,fit,par1,par2,save,message,filename):
             
     elif message == -1:
 
-        print "%s not considered, duplicate "%sn
+        print("%s not considered, duplicate "%sn)
         
         if save == 1:
             out.write("#%s not considered, duplicate \n"%sn) 
@@ -203,7 +203,7 @@ def print_and_save(sn,isn,nSN,data,fit,par1,par2,save,message,filename):
     # Not a normal Ia
     elif message == 1:
 
-        print "%s not considered, not a SN Ia norm (%s)"%(sn,par1)
+        print("%s not considered, not a SN Ia norm (%s)"%(sn,par1))
         
         if save == 1:
             out.write("#%s not considered, not a SN Ia norm (%s) \n"%(sn,par1))     
@@ -212,18 +212,18 @@ def print_and_save(sn,isn,nSN,data,fit,par1,par2,save,message,filename):
     elif message == 2:
 
         if par2 == 1:
-            print "%s not considered, missing redshift (spectra available) "%sn
+            print("%s not considered, missing redshift (spectra available) "%sn)
             if save == 1:
                 out.write("#%s not considered, missing redshift (spectra available) \n"%sn) 
         else:
-            print "%s not considered, missing redshift "%sn
+            print("%s not considered, missing redshift "%sn)
             if save == 1:
                 out.write("#%s not considered, missing redshift \n"%sn)     
 
     # Bad fit
     elif message == 3:
 
-        print "%s not considered, bad fit"%sn
+        print("%s not considered, bad fit"%sn)
 
         if save == 1:
             out.write("#%s not considered, bad fit \n"%sn)
@@ -231,7 +231,7 @@ def print_and_save(sn,isn,nSN,data,fit,par1,par2,save,message,filename):
     # No data points
     elif message == 4:
 
-        print "%s not considered, no data points \n"%sn
+        print("%s not considered, no data points \n"%sn)
 
         if save == 1:
             out.write("#%s not considered, no data points \n"%sn)

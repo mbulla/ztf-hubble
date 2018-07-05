@@ -10,4 +10,4 @@ Salt2 fitting is performed in fitall.py. Fitting parameters are saved to the dir
 
 Type Ia supernovae that are either (i) peculiar, (ii) with no spectroscopic redshift from the Marshall or (iii) with no photometry are not considered. Objects from the Marshall that are found to be duplicates (see duplicate function in myfun.py) are merged. 
 
-Histograms of relevant parameters and Hubble diagrams are plotted in hubble.py. The user is asked to specify if cuts on (i) x1, (ii) salt2 reduced chi2, (iii) maximum phase for g/r data and (iv) number of g/r data points are needed.
+Histograms of relevant parameters and Hubble diagrams are plotted in hdiag.py. The user is asked to specify if cuts on (i) x1, (ii) salt2 reduced chi2, (iii) maximum phase for g/r data and (iv) number of g/r data points are needed.

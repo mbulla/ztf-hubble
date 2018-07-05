@@ -11,7 +11,7 @@ from collections import OrderedDict as odict
 
 ##### OUTPUT FILE
 
-save = 0
+save = 1
 
 filename = "runs/fitall_"+datetime.datetime.now().strftime("%y-%m-%d-%H-%M-%S")
 

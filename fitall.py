@@ -43,7 +43,7 @@ if save == 1:
     out = open(filename+".txt","w")
     out.write("# %d Marshall SNe \n"%nSN)
     out.write("# LC fitter: salt \n")
-    out.write("# SN redshift t0 x0 x1 c ebv_mw rv_mw mu sig_mu gfirts rfirst Ng Nr chisq ndof \n")
+    out.write("# SN | redshift | t0 | x0 | x1 | c | ebv_mw | rv_mw | mu | sig_mu | gfirst | rfirst | Ng | Nr | chisq | ndof \n")
     out.close()
 
 

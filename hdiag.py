@@ -29,9 +29,10 @@ for which in os.listdir(path):
 		files.append(str(which))
 filename = files[-1]
 
-a = genfromtxt(path+filename)
-
+a = genfromtxt(path+filename,dtype=str)
 SN = a[:,0]
+
+a = genfromtxt(path+filename)
 z = a[:,1]
 t0 = a[:,2]
 x0 = a[:,3]

@@ -282,4 +282,3 @@ def hdiag_params():
         nmin_r = 0
 
     return  x1_min, x1_max, chisqred_max, phasemax_g, phasemax_r, nmin_g, nmin_r
-

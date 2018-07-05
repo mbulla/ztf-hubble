@@ -17,7 +17,7 @@ x1_min, x1_max, chisqred_max, pmax_g, pmax_r, nmin_g, nmin_r = mf.hdiag_params()
 
 ### Histogram Bin size
 dz = 0.01
-dep = 1
+dphase = 1
 dx1 = 0.5
 dc = 0.05
 

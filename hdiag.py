@@ -90,7 +90,7 @@ SN,x1,c,firstg,firstr,ng,nr,z,mu,sig_mu,chisqnew = list(zip(*ww))
 
 firstep = min(firstg,firstr)
 
-#print np.array(SN)[np.where(np.array(firstep)<-14)]
+print np.array(SN)[np.where(np.array(firstep)<-14)]
 
 ###### First epoch
 absmax = max(-min(firstep),max(firstep))

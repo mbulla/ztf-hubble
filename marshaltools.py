@@ -397,13 +397,13 @@ class MarshalLightcurve(BaseTable):
 
 import sncosmo
 
-def filters():
+def filters(directory):
 
     bandsP48 = {'p48i': 'P48_I.dat',
                 'p48r': 'P48_R.dat',
                 'p48g': 'P48_g.dat'}
 
-    fileDirectory = 'filters/P48/'
+    fileDirectory = directory+'filters/P48/'
     for bandName, fileName in bandsP48.items():
         filePath = os.path.join(fileDirectory, fileName)
         if not os.path.exists(filePath):
@@ -419,7 +419,7 @@ def filters():
                 'p60g': 'gband_eff.dat',
                 'p60u': 'uband_eff.dat'}
 
-    fileDirectory = 'filters/SEDm/'
+    fileDirectory = directory+'filters/SEDm/'
     for bandName, fileName in bandsP60.items():
         filePath = os.path.join(fileDirectory, fileName)
         if not os.path.exists(filePath):
@@ -437,7 +437,7 @@ def filters():
                 'uvw1': 'UVW1_synphot.txt',
                 'uvw2': 'UVW2_synphot.txt'}
 
-    fileDirectory = 'filters/UVOT/'
+    fileDirectory = directory+'filters/UVOT/'
     for bandName, fileName in bandsUVOT.items():
         filePath = os.path.join(fileDirectory, fileName)
         if not os.path.exists(filePath):

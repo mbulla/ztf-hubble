@@ -9,6 +9,7 @@ import time
 import datetime
 from collections import OrderedDict as odict
 
+verbose = False
 ##### OUTPUT FILE
 
 save = 1
@@ -37,7 +38,7 @@ for i in range(0,len(SN_dupl)):
     nobj[np.where(name==SN_dupl[i][1])[0][0]] = -1
 
 
-print "%d SNe"%nSN
+print("%d SNe"%nSN)
 # Write header
 if save == 1:
     out = open(filename+".txt","w")
@@ -52,22 +53,30 @@ if save == 1:
 
 idupl = 0
 
+# for i, n in enumerate(name):
+#    if n == "ZTF18abckujg":
+#        print(i, n)
+#        exit()
+
 for isn in range(0,nSN):
 
     # Are spectra available on the marshall?
     spec_flag = lcs.check_spec(name[isn]) 
     # Load light curve
     lc_dataSN = lcs.get_lightcurve(name[isn])
-    
-    if len(lc_dataSN.table) > 0:
+    lc_data, clas, idupl = mf.table_sncosmo_dupl(lc_dataSN,SN_dupl,nobj[isn],idupl)
 
+    if verbose:
+        print(isn, name[isn], spec_flag, lc_dataSN, lc_data, clas, idupl)
+
+    if len(lc_dataSN.table) > 0:
+        
         # Removed duplicate (this will be merged below in table_sncosmo_dupl)
         if (nobj[isn] == -1):
-            mf.print_and_save(name[isn],isn,nSN,lc_data,fit,clas,spec_flag,save,-1,filename)
+            mf.print_and_save(name[isn],isn,nSN,lc_data,None,clas,spec_flag,save,-1,filename)
 
         else:
             # Table of data in sncosmo format (merging duplicates)
-            lc_data, clas, idupl = mf.table_sncosmo_dupl(lc_dataSN,SN_dupl,nobj[isn],idupl)
 
             # Retrieve redshift and ebv_mw
             z = lc_data.meta['z']
@@ -79,11 +88,11 @@ for isn in range(0,nSN):
 
             # Peculiar Ia
             if (clas != "SN Ia" and clas != "SN Ia-norm"):
-                mf.print_and_save(name[isn],isn,nSN,lc_data,fit,clas,spec_flag,save,1,filename)
+                mf.print_and_save(name[isn],isn,nSN,lc_data,None,clas,spec_flag,save,1,filename)
 
             # Missing redshift
             elif (z==None):
-                mf.print_and_save(name[isn],isn,nSN,lc_data,fit,clas,spec_flag,save,2,filename) 
+                mf.print_and_save(name[isn],isn,nSN,lc_data,None,clas,spec_flag,save,2,filename) 
 
             #Do fit
             else:
@@ -120,8 +129,10 @@ for isn in range(0,nSN):
                     ###### Plots and output files
                     mf.print_and_save(name[isn],isn,nSN,lc_data,fit,mu,sig_mu,save,0,filename)
                     
-                except:
-                   mf.print_and_save(name[isn],clas,spec_flag,isn,nSN,lc_data,fit,save,3,filename)
+                except Exception as ex:
+                   print('Exception raise in no dust fit')
+                   print(ex)
+                   mf.print_and_save(name[isn],isn,nSN,lc_data,None,clas,spec_flag,save,3,filename)
 
     else:
-        mf.print_and_save(name[isn],isn,nSN,lc_data,fit,clas,spec_flag,save,4,filename)
+        mf.print_and_save(name[isn],isn,nSN,lc_data,None,clas,spec_flag,save,4,filename)

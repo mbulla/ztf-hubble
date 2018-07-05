@@ -139,7 +139,13 @@ def table_sncosmo_dupl(data,SN_dupl,nobj,idupl):
         lc_data.sort('mjd')
 
         idupl+=1
+    else:
+        lc_data = None
+        classification = None
+        idupl = 0
 
+
+    print('Number of objects is {}'.format(idupl), nobj)
 
     return lc_data, classification, idupl
 
@@ -148,7 +154,7 @@ def table_sncosmo_dupl(data,SN_dupl,nobj,idupl):
 ############### Print messages and saved parameters ############
 ################################################################
 
-def print_and_save(sn,isn,nSN,data,fit,par1,par2,save,message,filename):
+def print_and_save(sn,isn,nSN,data=None, fit=None,par1=None,par2=None,save=None,message=None,filename=None):
 
     if save == 1:
         out = open(filename+".txt","a+")
@@ -156,7 +162,7 @@ def print_and_save(sn,isn,nSN,data,fit,par1,par2,save,message,filename):
     # SN included in the analysis, good fit
     if message == 0:
 
-        print "%s (%d out of %d)"%(sn,isn+1,nSN)
+        print("%s (%d out of %d)"%(sn,isn+1,nSN))
 
         if save == 1:
 
@@ -194,7 +200,7 @@ def print_and_save(sn,isn,nSN,data,fit,par1,par2,save,message,filename):
             
     elif message == -1:
 
-        print "%s not considered, duplicate "%sn
+        print("%s not considered, duplicate "%sn)
         
         if save == 1:
             out.write("#%s not considered, duplicate \n"%sn) 
@@ -203,7 +209,7 @@ def print_and_save(sn,isn,nSN,data,fit,par1,par2,save,message,filename):
     # Not a normal Ia
     elif message == 1:
 
-        print "%s not considered, not a SN Ia norm (%s)"%(sn,par1)
+        print("%s not considered, not a SN Ia norm (%s)"%(sn,par1))
         
         if save == 1:
             out.write("#%s not considered, not a SN Ia norm (%s) \n"%(sn,par1))     
@@ -212,18 +218,18 @@ def print_and_save(sn,isn,nSN,data,fit,par1,par2,save,message,filename):
     elif message == 2:
 
         if par2 == 1:
-            print "%s not considered, missing redshift (spectra available) "%sn
+            print("%s not considered, missing redshift (spectra available) "%sn)
             if save == 1:
                 out.write("#%s not considered, missing redshift (spectra available) \n"%sn) 
         else:
-            print "%s not considered, missing redshift "%sn
+            print("%s not considered, missing redshift "%sn)
             if save == 1:
                 out.write("#%s not considered, missing redshift \n"%sn)     
 
     # Bad fit
     elif message == 3:
 
-        print "%s not considered, bad fit"%sn
+        print("%s not considered, bad fit"%sn)
 
         if save == 1:
             out.write("#%s not considered, bad fit \n"%sn)
@@ -231,7 +237,7 @@ def print_and_save(sn,isn,nSN,data,fit,par1,par2,save,message,filename):
     # No data points
     elif message == 4:
 
-        print "%s not considered, no data points \n"%sn
+        print("%s not considered, no data points \n"%sn)
 
         if save == 1:
             out.write("#%s not considered, no data points \n"%sn)
@@ -247,36 +253,36 @@ def print_and_save(sn,isn,nSN,data,fit,par1,par2,save,message,filename):
 
 def hdiag_params():
 
-    x1cut = raw_input("Would you like a cut on x1 [y/n] ? ")
+    x1cut = input("Would you like a cut on x1 [y/n] ? ")
 
     if x1cut == "y":
-        x1_min = input("Enter min(x1): ")
-        x1_max = input("Enter max(x1): ")
+        x1_min = np.float(input("Enter min(x1): "))
+        x1_max = np.float(input("Enter max(x1): "))
     else:
         x1_min = -11
         x1_max = 11
 
-    chicut = raw_input("Would you like a cut on the reduced chisquare from SALT2 fitting [y/n] ? ")
+    chicut = input("Would you like a cut on the reduced chisquare from SALT2 fitting [y/n] ? ")
 
     if chicut == "y":
-        chisqred_max = input("Enter max(chi_sq_red): ")
+        chisqred_max = np.float(input("Enter max(chi_sq_red): "))
     else:
         chisqred_max = 1e5
 
-    phasecut = raw_input("Would you like a cut on the maximum phase for the earliest g/r data point [y/n] ? ")
+    phasecut = input("Would you like a cut on the maximum phase for the earliest g/r data point [y/n] ? ")
 
     if phasecut == "y":
-        phasemax_g = input("Enter maximum phase in g band: ")
-        phasemax_r = input("Enter maximum phase in r band: ")
+        phasemax_g = np.float(input("Enter maximum phase in g band: "))
+        phasemax_r = np.float(input("Enter maximum phase in r band: "))
     else:
         phasemax_g = 1e5
         phasemax_r = 1e5
 
-    ncut = raw_input("Would you like a cut on the minimum number of g/r data points [y/n] ? ")
+    ncut = input("Would you like a cut on the minimum number of g/r data points [y/n] ? ")
 
     if ncut == "y":
-        nmin_g = input("Enter minimum number of data points in g band: ")
-        nmin_r = input("Enter minimum number of data points in r band: ")
+        nmin_g = np.int(input("Enter minimum number of data points in g band: "))
+        nmin_r = np.int(input("Enter minimum number of data points in r band: "))
     else:
         nmin_g = 0
         nmin_r = 0

@@ -3,6 +3,7 @@ import scipy as sp
 import matplotlib.pyplot as plt
 from pylab import *
 import os
+import myfun as mf
 
 plt.rcdefaults()
 plt.rc('lines', linewidth=1.5)
@@ -13,16 +14,7 @@ plt.rc("legend", fontsize=15)
 
 ##### Cut parameters
 
-x1_min = -5
-x1_max = 5
-
-epming = 0
-epminr = 0
-
-chisqred_max = 5
-
-ngmin = 1
-nrmin = 1
+pmax_g, pmax_r, nmin_g, nmin_r, x1_min, x1_max, chisqred_max = mf.hdiag_params()
 
 ### Histograms
 
@@ -105,8 +97,8 @@ ax1.hist(z,bins=arange(-dz/2.,dz*(nz+1/2.),dz),label="%d of %d SNe"%(len(z),Nmar
 ### Select good data
 w=list(zip(SN,x1,c,epg,epr,ng,nr,x0,z,mu,sig_mu,chisq_red))
 ww=list(filter(lambda r:r[1]>=x1_min and r[1]<=x1_max 
-					    and r[3]<=epming and r[4]<=epminr 
-					    and r[5]>=ngmin and r[6]>=nrmin
+					    and r[3]<=pmax_g and r[4]<=pmax_r 
+					    and r[5]>=nmin_g and r[6]>=nmin_r
 					    and r[11]<=chisqred_max,w))
 SN,x1,c,epg,epr,ng,nr,x0,z,mu,sig_mu,chisqnew = list(zip(*ww))
 
@@ -128,7 +120,6 @@ absmax = max(-min(c),max(c))
 nc = int(absmax/dc)+1
 ax4.hist(c,bins=arange(-dc*(nc+1/2.),dc*(nc+1/2.),dc),label="%d of %d SNe"%(len(c),Nmarsh))
 
-
 ax1.set_xlim(0,max(z)+dz/2.)
 ax2.set_xlim(-22,max(firstep))
 ax3.set_xlim(x1_min,x1_max)
@@ -141,7 +132,7 @@ ax2.legend(frameon=False)
 ax3.legend(frameon=False)
 ax4.legend(frameon=False)
 
-#fig.show()
+fig.show()
 
 #fig.savefig("hist.pdf")
 

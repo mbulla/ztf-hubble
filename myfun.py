@@ -239,3 +239,47 @@ def print_and_save(sn,isn,nSN,data,fit,par1,par2,save,message,filename):
 
     if save == 1:
         out.close()
+
+
+################################################################
+############# Line argument parameters for hdiag.py ############
+################################################################
+
+def hdiag_params():
+
+    phasecut = raw_input("Would you like a cut on the maximum phase for the earliest g/r data point [y/n] ? ")
+
+    if phasecut == "y":
+        phasemax_g = input("Enter maximum phase in g band: ")
+        phasemax_r = input("Enter maximum phase in r band: ")
+    else:
+        phasemax_g = 1e5
+        phasemax_r = 1e5
+
+    ncut = raw_input("Would you like a cut on the minimum number of g/r data points [y/n] ? ")
+
+    if ncut == "y":
+        nmin_g = input("Enter minimum number of data points in g band: ")
+        nmin_r = input("Enter minimum number of data points in r band: ")
+    else:
+        nmin_g = 0
+        nmin_r = 0
+
+    x1cut = raw_input("Would you like a cut on x1 [y/n] ? ")
+
+    if x1cut == "y":
+        x1_min = input("Enter min(x1): ")
+        x1_max = input("Enter max(x1): ")
+    else:
+        x1_min = -1e5
+        x1_max = 1e5
+
+    chicut = raw_input("Would you like a cut on the reduced chisquare from SALT2 fitting [y/n] ? ")
+
+    if chicut == "y":
+        chisqred_max = input("Enter min(chi_sq_red): ")
+    else:
+        chisqred_max = 1e5
+
+    return phasemax_g, phasemax_r, nmin_g, nmin_r, x1_min, x1_max, chisqred_max
+

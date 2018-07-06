@@ -140,6 +140,14 @@ def table_sncosmo_dupl(data,SN_dupl,nobj,idupl):
 
         idupl+=1
 
+    # Other duplicate (will be rejected in main function)
+    else:
+        classification = data.classification
+        z = data.redshift
+        ebv_mw = data.mwebv
+
+        lc_data = data.table_sncosmo
+
 
     return lc_data, classification, idupl
 

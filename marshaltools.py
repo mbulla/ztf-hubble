@@ -55,16 +55,18 @@ def encrypt_config():
     import getpass
     des = DES.new(base64.b64decode( _SOURCE ), DES.MODE_ECB)
     out = {}
-    out['username'] = raw_input('Enter your GROWTH Marshal username: ')
+    out['username'] = input('Enter your GROWTH Marshal username: ')
     out['password'] = getpass.getpass()
-    fileout = open(_CONFIG_FILE, "wb")
+    fileout = open(_CONFIG_FILE, "w")
     fileout.write(des.encrypt(pad(json.dumps(out))))
+    #fileout.write(json.dumps(out))
     fileout.close()
 
 def decrypt_config():
     """ """
     des = DES.new(  base64.b64decode( _SOURCE ), DES.MODE_ECB)
     out = json.loads(des.decrypt(open(_CONFIG_FILE, "rb").read()))
+    #out = json.load(open(_CONFIG_FILE, "r"))
     return out['username'], out['password']
 
 if not os.path.exists(_CONFIG_FILE):
@@ -286,6 +288,8 @@ class MarshalLightcurve(BaseTable):
                 else:
                     self.dustmap = sfdmap.SFDMap(self.sfd_dir)
                 self.mwebv = self.dustmap.ebv(ra, dec)
+            else:
+                self.mwebv = 0.0
             
         r = requests.post('http://skipper.caltech.edu:8080/cgi-bin/growth/print_lc.cgi',
                           auth=(self.user, self.passwd),
@@ -339,7 +343,7 @@ class MarshalLightcurve(BaseTable):
             else:
                 mask.append(False)
 
-        mask = np.array(mask)
+        mask = np.array(mask, dtype=bool)
         out = Table(data=[mjd[mask], band, flux[mask], eflux[mask], zp[mask], zpsys],
                     names=['mjd', 'band', 'flux', 'fluxerr', 'zp', 'zpsys'])
         out.meta['z'] = self.redshift

@@ -15,7 +15,7 @@ save = 1
 
 filename = "runs/fitall_"+datetime.datetime.now().strftime("%y-%m-%d-%H-%M-%S")
 
-mt.filters("./")
+mt.filters('./')
 
 alpha = 0.14
 beta = 3.14
@@ -59,18 +59,16 @@ for isn in range(0,nSN):
     spec_flag = lcs.check_spec(name[isn]) 
     # Load light curve
     lc_dataSN = lcs.get_lightcurve(name[isn])
+    # Table of data in sncosmo format (merging duplicates)
+    lc_data, clas, idupl = mf.table_sncosmo_dupl(lc_dataSN,SN_dupl,nobj[isn],idupl)
 
     if len(lc_dataSN.table) > 0:
-
+        
         # Removed duplicate (this will be merged below in table_sncosmo_dupl)
         if (nobj[isn] == -1):
-            mf.print_and_save(name[isn],isn,nSN,None,None,clas,spec_flag,save,-1,filename)
+            mf.print_and_save(name[isn],isn,nSN,lc_data,None,clas,spec_flag,save,-1,filename)
 
         else:
-            
-            # Table of data in sncosmo format (merging duplicates)
-            lc_data, clas, idupl = mf.table_sncosmo_dupl(lc_dataSN,SN_dupl,nobj[isn],idupl)
-    
             # Retrieve redshift and ebv_mw
             z = lc_data.meta['z']
             ebv_mw = lc_data.meta['mwebv']
@@ -81,11 +79,11 @@ for isn in range(0,nSN):
 
             # Peculiar Ia
             if (clas != "SN Ia" and clas != "SN Ia-norm"):
-                mf.print_and_save(name[isn],isn,nSN,None,None,clas,spec_flag,save,1,filename)
+                mf.print_and_save(name[isn],isn,nSN,lc_data,None,clas,spec_flag,save,1,filename)
 
             # Missing redshift
             elif (z==None):
-                mf.print_and_save(name[isn],isn,nSN,None,None,clas,spec_flag,save,2,filename) 
+                mf.print_and_save(name[isn],isn,nSN,lc_data,None,clas,spec_flag,save,2,filename) 
 
             #Do fit
             else:
@@ -122,8 +120,10 @@ for isn in range(0,nSN):
                     ###### Plots and output files
                     mf.print_and_save(name[isn],isn,nSN,lc_data,fit,mu,sig_mu,save,0,filename)
                     
-                except:
-                   mf.print_and_save(name[isn],isn,nSN,None,None,clas,spec_flag,save,3,filename)
+                except Exception as ex:
+                   print('Exception raise in no dust fit')
+                   print(ex)
+                   mf.print_and_save(name[isn],isn,nSN,lc_data,None,clas,spec_flag,save,3,filename)
 
     else:
-        mf.print_and_save(name[isn],isn,nSN,None,None,clas,spec_flag,save,4,filename)
+        mf.print_and_save(name[isn],isn,nSN,lc_data,None,clas,spec_flag,save,4,filename)

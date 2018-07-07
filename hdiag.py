@@ -55,6 +55,7 @@ for i, line in enumerate(a):
 		Nmarsh = float(line.split(' ')[1])
 
 chisq_red = np.array(chisq) / ndof
+chisqred_max = np.float(chisqred_max)
 
 print("%s are missing g-band photometry" %len(np.array(firstg)[np.where(np.array(firstg)==1e6)]))
 print("%s are missing r-band photometry" %len(np.array(firstr)[np.where(np.array(firstr)==1e6)]))
@@ -90,7 +91,7 @@ SN,x1,c,firstg,firstr,ng,nr,z,mu,sig_mu,chisqnew = list(zip(*ww))
 
 firstep = min(firstg,firstr)
 
-print(np.array(SN)[np.where(np.array(firstep)<-14)])
+#print np.array(SN)[np.where(np.array(firstep)<-14)]
 
 ###### First epoch
 absmax = max(-min(firstep),max(firstep))

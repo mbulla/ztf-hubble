@@ -142,7 +142,6 @@ def table_sncosmo_dupl(data,SN_dupl,nobj,idupl):
     else:
         lc_data = None
         classification = None
-        idupl = 0
 
 
     print('Number of objects is {}'.format(idupl), nobj)

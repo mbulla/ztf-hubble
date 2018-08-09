@@ -249,7 +249,7 @@ def print_and_save(sn,isn,nSN,data=None,fit=None,par1=None,par2=None,save=None,m
 
 def hdiag_params():
 
-    x1cut = input("Would you like a cut on x1 [y/n] ? ")
+    x1cut = raw_input("Would you like a cut on x1 [y/n] ? ")
 
     if x1cut == "y":
         x1_min = np.float(input("Enter min(x1): "))
@@ -258,14 +258,14 @@ def hdiag_params():
         x1_min = -11
         x1_max = 11
 
-    chicut = input("Would you like a cut on the reduced chisquare from SALT2 fitting [y/n] ? ")
+    chicut = raw_input("Would you like a cut on the reduced chisquare from SALT2 fitting [y/n] ? ")
 
     if chicut == "y":
         chisqred_max = np.float(input("Enter max(chi_sq_red): "))
     else:
         chisqred_max = 1e5
 
-    phasecut = input("Would you like a cut on the maximum phase for the earliest g/r data point [y/n] ? ")
+    phasecut = raw_input("Would you like a cut on the maximum phase for the earliest g/r data point [y/n] ? ")
 
     if phasecut == "y":
         phasemax_g = np.float(input("Enter maximum phase in g band: "))
@@ -274,7 +274,7 @@ def hdiag_params():
         phasemax_g = 1e5
         phasemax_r = 1e5
 
-    ncut = input("Would you like a cut on the minimum number of g/r data points [y/n] ? ")
+    ncut = raw_input("Would you like a cut on the minimum number of g/r data points [y/n] ? ")
 
     if ncut == "y":
         nmin_g = np.int(input("Enter minimum number of data points in g band: "))
